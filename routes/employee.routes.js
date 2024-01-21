@@ -1,25 +1,31 @@
 import express from 'express';
-import cors from 'cors'
-import User from '../models/user.model.js';
-import Admin from '../models/admin.model.js'
-import bcrypt from 'bcryptjs';
-import {  signin,  } from '../controllers/auth.controller.js';
-import  { body, validationResult } from'express-validator';
+import Employee from '../models/employee.model.js'
+import {createmployee, getallemployees, deleteemployee,updateemployee} from '../controllers/employee.controller.js'
 const router = express.Router();
-import jwt from 'jsonwebtoken';
-const JWT_SECRET = 'lallulalkepakode23';
 
 
-router.post('/employee',  async (req, res) => {
-  try {
-    const employee = await User.find({ tag: "employ" });
-    res.json(employee);
-  } catch (error) {
-    console.error('Error:', error.message);
-    res.status(500).send('An error occurred');
-  }
+
+
+// Employees Routes
+router.post('/employee',createmployee );
+router.get('/employees', getallemployees);
+router.delete('/employee/:id', deleteemployee);
+router.put('/employee/:id', updateemployee
+  // Update an employee by ID (Managers only)
+);
+
+router.put('/employees/:id',(req, res) => {
+   // Get employee details by ID
 });
 
+// Filter Employees Routes
+router.get('/employees/filter/location', (req, res) => {
+  // Filter employees by location
+});
+
+router.get('/employees/filter/name/:order', (req, res) => {
+  // Filter employees by name in ascending or descending order
+});
 
 
 

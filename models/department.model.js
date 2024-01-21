@@ -12,6 +12,7 @@ const departmentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Employee' // Reference to the employee who manages this department
   },
+  
   // Any other fields you want for your department
 });
 

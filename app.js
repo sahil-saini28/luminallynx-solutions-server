@@ -4,14 +4,16 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 // import userRouter from './routes/user.route.js';
+
 import authRouter from './routes/auth.route.js';
 // import listingRouter from './routes/listing.route.js';
 // import cookieParser from 'cookie-parser';
 // import path from 'path';
 import departmentRouter from './routes/department.routes.js'
 dotenv.config();
+
 mongoose
-  .connect("")
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log('Connected to MongoDB!');
   })
@@ -26,9 +28,9 @@ app.use(cors());
 
 app.use('/api/auth', authRouter);
 
-app.use('/api/departments', departmentRouter);
+app.use('/api/v1/dept', departmentRouter);
 
-app.use('/api/fetch',employee)
+app.use('/api/v1',employee)
 
 app.get('/',(req,res)=>{
   res.send("Hello  sdFv World!");

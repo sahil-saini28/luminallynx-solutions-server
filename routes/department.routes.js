@@ -7,26 +7,12 @@ const router = express.Router();
 import jwt from 'jsonwebtoken';
 const JWT_SECRET = 'lallulalkepakode23';
 import department from "../models/department.model.js"
+import {createdepartment} from '../controllers/department.controller.js'
 
-router.post('/creatdepartment',async(req,res)=>{
-  try {
-    const { name, description,employid } = req.body;
 
-    // Create a new department based on the Department model
-    const newDepartment = new department({
-      name,
-      description,
-      employid // You should validate and assign the manager's ObjectId here
-    });
+router.post('/creatdepartment',createdepartment);
 
-    // Save the new department to the database
-    const savedDepartment = await newDepartment.save();
 
-    res.status(201).json(savedDepartment); // Respond with the created department
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
 router.get('/getalldepartment', async (req, res) => {
   try {
     const departments = await department.find(); // Fetch all departments from the database
