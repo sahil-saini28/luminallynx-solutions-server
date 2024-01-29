@@ -9,8 +9,8 @@ const departmentSchema = new mongoose.Schema({
     type: String
   },
   employid: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Employee' // Reference to the employee who manages this department
+    type: Array,
+    default: [], // Default value for the array (optional)
   },
   
   // Any other fields you want for your department

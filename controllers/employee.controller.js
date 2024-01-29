@@ -26,7 +26,7 @@ export const getallemployees = async (req, res) => {
 }
 export const deleteemployee = async (req, res) => {
   try {
-    const { id  }= req.param;
+    const  id  = req.header("id");
     
     await Employee.findByIdAndDelete(id);
     res.json({ message: 'User deleted successfully' });

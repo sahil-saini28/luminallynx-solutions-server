@@ -9,7 +9,7 @@ const router = express.Router();
 // Employees Routes
 router.post('/employee',createmployee );
 router.get('/employees', getallemployees);
-router.delete('/employee/:id', deleteemployee);
+router.delete('/employee', deleteemployee);
 router.put('/employee/:id', updateemployee
   // Update an employee by ID (Managers only)
 );

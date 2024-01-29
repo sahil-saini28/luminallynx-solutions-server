@@ -7,34 +7,14 @@ const router = express.Router();
 import jwt from 'jsonwebtoken';
 const JWT_SECRET = 'lallulalkepakode23';
 import department from "../models/department.model.js"
-import {createdepartment} from '../controllers/department.controller.js'
+import {createdepartment, getalldept,deletedepartment} from '../controllers/department.controller.js'
 
 
 router.post('/creatdepartment',createdepartment);
 
 
-router.get('/getalldepartment', async (req, res) => {
-  try {
-    const departments = await department.find(); // Fetch all departments from the database
-    res.status(200).json(departments); // Respond with the retrieved departments
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-router.get('/department:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const employee = await Employee.findById(id); // Fetch employee by ID from the database
-
-    if (!employee) {
-      return res.status(404).json({ message: 'Employee not found' });
-    }
-
-    res.status(200).json(employee); // Respond with the retrieved employee
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
+router.get('/getalldepartment',getalldept );
+router.delete('/department',deletedepartment );
 router.put('/department/:id',  async (req, res) => {
   const { name, description,  } = req.body;
 
