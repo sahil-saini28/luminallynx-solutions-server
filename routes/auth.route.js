@@ -7,11 +7,11 @@ import  { body, validationResult } from 'express-validator';
 const router = express.Router();
 import jwt from 'jsonwebtoken';
 const JWT_SECRET = 'lallulalkepakode23';
-
+import Employee from '../models/employee.model.js'
 
 
 router.post('/singup', [
-  body('username', 'Enter a valid name').isLength({ min: 3 }),
+  body('name', 'Enter a valid name').isLength({ min: 3 }),
   body('email', 'Enter a valid email').isEmail(),
   body('password', 'Password must be at least 5 characters')
 ], async (req, res) => {
@@ -21,17 +21,22 @@ router.post('/singup', [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    let user = await User.findOne({ email: req.body.email });
+    let user = await Employee.findOne({ email: req.body.email });
     if (user) {
       return res.status(400).json({ error: 'User already exists' });
     }
 
     const salt = await bcrypt.genSalt(10);
     const secPass = await bcrypt.hash(req.body.password, salt);
-    user = await User.create({
-      username: req.body.username,
+    user = await Employee.create({
+      name: req.body.name,
       password: secPass,
-      email: req.body.email
+      email: req.body.email,
+      isManager: req.body.isManager,
+      avatar: req.body.avatar
+
+      
+
     });
 
     const data = {

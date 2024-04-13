@@ -18,8 +18,8 @@ const employeeSchema = new mongoose.Schema({
     
   },
   isManager: {
-    type: Boolean,
-    default: false,
+    type: String,
+    default: 'no',
   },
   dateOfBirth: {
     type: Date,

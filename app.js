@@ -32,8 +32,9 @@ app.use('/api/v1/dept', departmentRouter);
 
 app.use('/api/v1',employee)
 
-app.get('/',(req,res)=>{
-  res.send("Hello  sdFv World!");
+app.post('/',(req,res)=>{
+  // let {tu}= req.body
+  res.json(req.body);
 } )
 
 

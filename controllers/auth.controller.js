@@ -4,6 +4,7 @@ import { body, validationResult } from 'express-validator';
 import { errorHandler } from '../utils/error.js';
 import jwt from 'jsonwebtoken';
 const JWT_SECRET = 'lallulalkepakode23';
+import Employee from '../models/employee.model.js'
 // export const signup = async (req, res, next) => {
 //   const { username, email, password } = req.body;
 //   // const hashedPassword = bcryptjs.hashSync(password, 10);
@@ -43,14 +44,14 @@ const JWT_SECRET = 'lallulalkepakode23';
 // };
 
 export const signin = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, isManager,avatar } = req.body;
   try {
-    let user = await User.findOne({ email });
+    let user = await Employee.findOne({ email });
     if (!user) {
       return res.status(400).json({ error: 'Try valid email and password' });
     }
 
-    const passwordCompare = await bcrypt.compare( password, user.password);
+    const passwordCompare = await bcrypt.compare( password, Employee.password);
     if (!passwordCompare) {
       return res.status(400).json({ error: 'Try with valid credentials' });
     }
